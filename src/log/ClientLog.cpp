@@ -28,11 +28,11 @@ namespace lily::log
         return instance;
     }
 
-    void ClientLog::write(int64_t beginHandshake, int64_t hsDurationUs, uint64_t writeSize, int64_t writeDurationUs, uint64_t recvSize,
+    void ClientLog::write(int64_t hsDurationUs, uint64_t writeSize, int64_t writeDurationUs, uint64_t recvSize,
                           int64_t recvDurationUs)
     {
         auto log {
-            fmt::format("{};{};{};{};{};{}\r\n", beginHandshake, hsDurationUs, writeSize, writeDurationUs, recvSize, recvDurationUs)};
+            fmt::format("{};{};{};{};{}\r\n", hsDurationUs, writeSize, writeDurationUs, recvSize, recvDurationUs)};
         std::lock_guard lock {this->mtx};
         this->stream.write(log.c_str(), log.size());
         this->stream.flush();

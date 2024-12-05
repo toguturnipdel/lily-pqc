@@ -143,7 +143,7 @@ namespace lily::net
         }
 
         // Log server SSL performance
-        ClientLog::getInstance().write(beginReadTime, handshakeDuration, writeSize, writeDuration, readSize, readDuration);
+        ClientLog::getInstance().write(handshakeDuration, writeSize, writeDuration, readSize, readDuration);
 
         // Gracefully close the stream
         stream.shutdown(ec);
